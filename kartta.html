@@ -38,6 +38,16 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        $.getJSON("https://rata.digitraffic.fi/api/v1/train-locations/latest/", function (result) {
+            for (let train of result) {
+                let gps = train["location"]["coordinates"];
+                L.marker([gps[1], gps[0]]).addTo(map)
+                    .bindPopup("Juna "+train["trainNumber"]+"<br>"+
+                    train["speed"] + " km/h");
+            }
+        });
     </script>
 </body>
+
 </html>
