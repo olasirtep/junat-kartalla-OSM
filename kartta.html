@@ -61,10 +61,17 @@
             $.getJSON(API_URI, function (result) {
                 for (let train of result) {
                     let gps = train["location"]["coordinates"];
-                    trains[train["trainNumber"]].setLatLng([gps[1], gps[0]]).update();
-                    trains[train["trainNumber"]]._popup.setContent(
-                        "Juna " + train["trainNumber"] + "<br>" +
-                        train["speed"] + " km/h");
+                    try {
+                        trains[train["trainNumber"]].setLatLng([gps[1], gps[0]]).update();
+                        trains[train["trainNumber"]]._popup.setContent(
+                            "Juna " + train["trainNumber"] + "<br>" +
+                            train["speed"] + " km/h");
+                    } catch (e) {
+                        var trainMarker = L.marker([gps[1], gps[0]]).addTo(map)
+                            .bindPopup("Juna " + train["trainNumber"] + "<br>" +
+                                train["speed"] + " km/h");
+                        trains[train["trainNumber"]] = trainMarker;
+                    }
                 }
             });
         }
