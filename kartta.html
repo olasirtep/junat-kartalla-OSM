@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Junat kartalla</title>
+    <meta charset="utf-8">
+    <!--Haetaan leaflet-kirjaston CSS-tyylit-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Poistetaan body-elementille oletuksena tuleva margin */
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- DIV-elementti karttaa varten -->
+    <div id="map" style="width: 100vw; height: 100vh"></div>
+
+    <!-- LINKITETÄÄN LEAFLET.JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- LINKITETÄÄN JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        // Määritellään karttaan alkusijainti (eteläinen puolisko Suomesta) ja zoom-taso
+        var mapOptions = {
+            center: [62.960, 25.598],
+            zoom: 6
+        }
+
+        // Luodaan leafletin kartta-ohbjekti
+        var map = new L.map('map', mapOptions);
+
+        //Määritellään nyt leaflet hakemaan varsinainen karttakuva OpenStreetMapista
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
+</body>
+</html>
