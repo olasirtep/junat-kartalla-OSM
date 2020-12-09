@@ -34,19 +34,43 @@
         // Luodaan leafletin kartta-ohbjekti
         var map = new L.map('map', mapOptions);
 
+        // Lista johon tallennetaan junien merkit
+        var trains = {};
+
+        // 
+        var API_URI = "https://rata.digitraffic.fi/api/v1/train-locations/latest/";
+
         //Määritellään nyt leaflet hakemaan varsinainen karttakuva OpenStreetMapista
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        $.getJSON("https://rata.digitraffic.fi/api/v1/train-locations/latest/", function (result) {
+        $(function () {
+            $.getJSON(API_URI, function (result) {
+                for (let train of result) {
+                    let gps = train["location"]["coordinates"];
+                    var trainMarker = L.marker([gps[1], gps[0]]).addTo(map)
+                        .bindPopup("Juna " + train["trainNumber"] + "<br>" +
+                            train["speed"] + " km/h");
+                    trains[train["trainNumber"]] = trainMarker;
+                }
+            });
+        });
+
+        function fetchAPI() {
+            $.getJSON(API_URI, function (result) {
+                updateLocations(result);
+            });
+        }
+
+        function updateLocations(result) {
             for (let train of result) {
                 let gps = train["location"]["coordinates"];
-                L.marker([gps[1], gps[0]]).addTo(map)
-                    .bindPopup("Juna "+train["trainNumber"]+"<br>"+
-                    train["speed"] + " km/h");
+                trains[train["trainNumber"]].setLatLng([gps[1], gps[0]]).update();
             }
-        });
+        }
+
+        var autoUpdate = setInterval(fetchAPI, 1000);
     </script>
 </body>
 
