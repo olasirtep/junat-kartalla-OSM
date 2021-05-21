@@ -1,3 +1,4 @@
+## :mortar_board: I used this as an assignment for students learning about Open Data. This is an example of completed exercise.
 ![Kuvakaappaus](https://www.tavastiasoft.fi/wp-content/uploads/2020/12/junat-kartalla.png)
 # Junien sijainnin näyttäminen kartalla
 Tässä harjoituksessa opit miten avoimesti saatavalla olevaa sijaintidataa voidaan suhteellisen yksinkertaisesti esittää graafisessa muodossa kartalle sijoitettuna.
