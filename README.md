@@ -1,4 +1,6 @@
 ## :mortar_board: I used this as an assignment for students learning about Open Data. This is an example of completed exercise.
+English description: This exercise demonstrated how to create a simple webpage that shows the live location of all the trains currently operating in Finland. The data is fetched from the Digitraffic Trains API and populated onto OpenStreetMap using Leaflet.js
+
 ![Kuvakaappaus](https://www.tavastiasoft.fi/wp-content/uploads/2020/12/junat-kartalla.png)
 # Junien sijainnin näyttäminen kartalla
 Tässä harjoituksessa opit miten avoimesti saatavalla olevaa sijaintidataa voidaan suhteellisen yksinkertaisesti esittää graafisessa muodossa kartalle sijoitettuna.
